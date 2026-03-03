@@ -27,5 +27,5 @@ def nlp_palabras_claves(texto: str):
     #print(palabras_claves)
     return palabras_claves
     
-''' resultado = nlp_palabras_claves(texto) 
-print(resultado) '''
+resultado = nlp_palabras_claves(texto) 
+print(resultado) 
