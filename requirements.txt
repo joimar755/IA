@@ -1,0 +1,13 @@
+fastapi
+mysql-connector-python
+passlib
+uvicorn
+pydantic
+alembic
+psycopg2-binary
+python-dotenv 
+SpaCy
+NLTK
+Transformers
+TextBlob
+#es_core_news_md
