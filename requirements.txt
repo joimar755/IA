@@ -11,3 +11,6 @@ NLTK
 Transformers
 TextBlob
 #es_core_news_md
+langdetect
+sentencepiece
+sentence-transformers
