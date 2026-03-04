@@ -23,8 +23,6 @@ convocatoria_routes = APIRouter(
 )
 
 
-
-
 @convocatoria_routes.post("/convocatorias")
 def getnew(
     post: modelo_chatbot.Convocatorias_publicar,
