@@ -16,34 +16,6 @@ class Users(Base):
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     rol_id = Column(Integer, ForeignKey("rol.id", ondelete="CASCADE"), nullable=False)
 
-
-class Convocatorias_Tipos(Base):
-    __tablename__ = "convocatorias_Tipos"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(255), nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()')) 
-    
-class Convocatorias_Publicar(Base):
-    __tablename__ = "convocatorias_publicar"
-    id = Column(Integer, primary_key=True)
-    titulo = Column(String(255), nullable=False)
-    descripcion = Column(String(255), nullable=False)
-    id_tipos_convocatorias = Column(Integer, ForeignKey("convocatorias_Tipos.id", ondelete="CASCADE"), nullable=False)
-    fecha_inicio = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))    
-    fecha_fin = Column(TIMESTAMP(timezone=True), nullable=False)
-
-    
-class Postulaciones(Base):
-    __tablename__ = "Postulaciones"
-    id = Column(Integer, primary_key=True)
-    titulo = Column(String(255), nullable=False)
-    descripcion = Column(String(255), nullable=False)
-    puntaje_prueba = Column(Float)
-    id_convocatorias = Column(Integer, ForeignKey("convocatorias_publicar.id", ondelete="CASCADE"), nullable=False)
-    usuario_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    fecha_postulacion = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))    
-
-
 class Conversations(Base):
     __tablename__ = "conversations"
     id = Column(Integer, primary_key=True)
