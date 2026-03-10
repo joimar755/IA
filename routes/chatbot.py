@@ -39,4 +39,4 @@ while True:
         print("Hasta luego 👋")
         break
     respuesta = chat_convocatoria(pregunta)
-    print(f"\nChat-convocatoria: {respuesta}\n") """
+    print(f"\nChat-convocatoria: {respuesta}\n")  """

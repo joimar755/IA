@@ -64,7 +64,7 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
         print("Mensaje bot guardado correctamente")
     except Exception as e:
         db.rollback()
-    print("Error guardando mensaje bot:", e)
+        print("Error guardando mensaje bot:", e)
 
     # Traer historial completo
     historial = db.query(Messages)\
