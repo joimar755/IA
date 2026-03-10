@@ -8,10 +8,7 @@ class MensajesCrear(BaseModel):
     rol_id: Optional[int] = 1 
     conversation_id: Optional[int] = None
 class MensajesOut(MensajesCrear):   
-  
     content: str
-    
-
     class Config:
         orm_mode = True
         
