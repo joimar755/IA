@@ -26,6 +26,11 @@ CORREO_DESTINO = "joimarjose19@example.com"
 
 @chatbot_routes.post("/chatbot")
 def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
+    resumen = None
+    texto_traducido = None
+    entidades = []
+    palabras_claves = []
+    sentimiento = None
     usuario_id = 3 
 
     conversacion = db.query(Conversations)\
@@ -80,6 +85,7 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
             palabras_claves = nlp_palabras_claves(datos.content)
             sentimiento = analisis_sentimientos_nlp(datos.content)
             print(resumen)
+            print(palabras_claves)
         except Exception as e:
             print("Error generando respuesta del bot:", e)
             respuesta_bot = "Lo siento, no pude generar respuesta."
@@ -105,6 +111,4 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
         .order_by(Messages.created_at.asc())\
         .all()
 
-    return {"mensajes": historial
-            
-            }  
+    return {"mensajes": historial}  
