@@ -84,8 +84,8 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
             entidades = entidades_nlp(datos.content)
             palabras_claves = nlp_palabras_claves(datos.content)
             sentimiento = analisis_sentimientos_nlp(datos.content)
-            print(resumen)
-            print(palabras_claves)
+            print("resumen",resumen)
+            print("claves",palabras_claves)
         except Exception as e:
             print("Error generando respuesta del bot:", e)
             respuesta_bot = "Lo siento, no pude generar respuesta."
