@@ -6,9 +6,6 @@ from nltk.corpus import stopwords
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 
-texto = """ 
-Tengo dolor al orinar y molestia en la vejiga desde hace dos días.
-""" 
 
 
 def nlp_palabras_claves(texto: str):
@@ -21,11 +18,11 @@ def nlp_palabras_claves(texto: str):
     
     tokens_filtrados = [word for word in tokens if word.isalnum() and word not in stop_words]   
     frecuencia = FreqDist(tokens_filtrados)
-    print("palabras claves")
     palabras_claves = [palabra for palabra, freq in frecuencia.most_common(5)]
 
     #print(palabras_claves)
     return palabras_claves
     
-resultado = nlp_palabras_claves(texto) 
+""" resultado = nlp_palabras_claves(texto) 
 print(resultado) 
+ """

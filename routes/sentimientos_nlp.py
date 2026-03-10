@@ -3,9 +3,6 @@ from transformers import pipeline
 
 analisis_sentimientos = pipeline("text-classification", model="finiteautomata/beto-sentiment-analysis") 
 
-texto = """ 
-Tengo dolor al orinar y molestia en la vejiga desde hace dos días.
-""" 
 
 def analisis_sentimientos_nlp(texto: str):
     resultado = analisis_sentimientos(texto)
@@ -15,9 +12,9 @@ def analisis_sentimientos_nlp(texto: str):
         "confianza": round(resultado[0]['score'], 4)
     }
 
-resultado = analisis_sentimientos_nlp(texto)
+""" resultado = analisis_sentimientos_nlp(texto)
 print("Resultado del análisis de sentimientos:", resultado) 
-
+ """
 
 ''' print(resultado)
 print(f"frase: {texto}")

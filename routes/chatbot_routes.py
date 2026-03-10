@@ -13,6 +13,12 @@ from modelo.modelo_chatbot import MensajesCrear, MensajesOut, ConversationOut
 from routes.reportes import generar_pdf_historial
 from routes.email_sender import enviar_pdf_correo
 
+from routes.sentimientos_nlp import analisis_sentimientos_nlp
+from routes.resumen_nlp import resumen_nlp
+from routes.entidad_nlp import entidades_nlp
+from routes.traduccion_nlp import traduccion_nlp
+from routes.palabras_claves import nlp_palabras_claves
+
 chatbot_routes = APIRouter()
 
 USUARIO_ESTATICO = 3
@@ -22,7 +28,6 @@ CORREO_DESTINO = "joimarjose19@example.com"
 def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
     usuario_id = 3 
 
-    # Crear nueva conversación si no existe
     conversacion = db.query(Conversations)\
         .filter(Conversations.usuario_id == usuario_id, Conversations.status == "activa")\
         .order_by(Conversations.id.desc())\
@@ -55,7 +60,6 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
         respuesta_bot = "Lo siento, no pude generar respuesta."
  """ 
     if datos.content.lower() == "generar reporte":
-        # Traer historial completo
         historial = db.query(Messages)\
             .filter(Messages.conversation_id == conversacion.id)\
             .order_by(Messages.created_at.asc())\
@@ -67,15 +71,19 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
 
         respuesta_bot = "Se ha generado el reporte y se envió al correo configurado."
     else:
-        # 4️⃣ Generar respuesta del bot normal
         try:
             respuesta_bot = chat_convocatoria(datos.content)
             print("RESPUESTA BOT:", respuesta_bot)
+            resumen = resumen_nlp(datos.content)
+            texto_traducido = traduccion_nlp(datos.content)
+            entidades = entidades_nlp(datos.content)
+            palabras_claves = nlp_palabras_claves(datos.content)
+            sentimiento = analisis_sentimientos_nlp(datos.content)
+            print(resumen)
         except Exception as e:
             print("Error generando respuesta del bot:", e)
             respuesta_bot = "Lo siento, no pude generar respuesta."
 
-# Guardar mensaje bot
     try:
         mensaje_bot = Messages(
         conversation_id=conversacion.id,
@@ -92,10 +100,11 @@ def enviar_mensaje( datos:MensajesOut, db: Session = Depends(get_db)):
         db.rollback()
         print("Error guardando mensaje bot:", e)
 
-    # Traer historial completo
     historial = db.query(Messages)\
         .filter(Messages.conversation_id == conversacion.id)\
         .order_by(Messages.created_at.asc())\
         .all()
 
-    return {"mensajes": historial}  # ⚡ clave para React
+    return {"mensajes": historial
+            
+            }  

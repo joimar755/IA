@@ -8,8 +8,6 @@ Tengo dolor al orinar y molestia en la vejiga desde hace dos días.
 def entidades_nlp(texto:str):
     doc = nlp(texto)
 
-    print("entidades nombradas:")
-
     for en in doc.ents:
         print(f"texto:{en.text}, tipo:{en.label_}")
 
