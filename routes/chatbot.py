@@ -23,7 +23,7 @@ def chat_convocatoria(pregunta, max_tokens=200):
         output = model.generate(
             **inputs,
             max_new_tokens=max_tokens,
-            temperature=0.7,
+            temperature=0.2,
             top_p=0.9,
             do_sample=True,
             pad_token_id=tokenizer.eos_token_id
