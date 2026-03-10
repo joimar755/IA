@@ -1,46 +1,30 @@
 from datetime import datetime
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 
-class Convocatorias_publicar(BaseModel):
-    titulo: str
-    descripcion: str
-    id_tipos_convocatorias : Optional[int]
-    fecha_inicio : datetime
-    fecha_fin : datetime
-
-
-class vhcreate(Convocatorias_publicar):
-    pass
-
-
-class Postulaciones(BaseModel):
-    titulo: str
-    descripcion: str
-    puntaje_prueba: float
-    id_convocatorias: Optional[int]
-    fecha_postulacion: datetime
-
-class messages(BaseModel):
+class MensajesCrear(BaseModel):
+    content: str
+    rol_id: Optional[int] = 1 
+    conversation_id: Optional[int] = None
+class MensajesOut(MensajesCrear):   
+  
     content: str
     
-class messages_uno(messages):
+
+    class Config:
+        orm_mode = True
+        
+class ConversationCreate(BaseModel):
+    usuario_id: int
+
+class ConversationOut(BaseModel):
     id: int
-    conversation_id: Optional[int]
-    rol_id: Optional[int]
-
-
-class vh(Postulaciones):
-    id: int
-    usuario_id: Optional[int]
-
-
-class conversations(BaseModel):
+    usuario_id: int
+    messages: List[MensajesOut]  # <-- aquí agregamos historial
     fecha_inicio: datetime
-    fecha_fin:datetime
-    status: bool 
+    fecha_fin: Optional[datetime]
+    status: str
 
-class conversations_mess(conversations):
-    id: int
-    usuario_id: Optional[int]
+    class Config:
+        orm_mode = True

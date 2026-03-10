@@ -1,8 +1,7 @@
 from fastapi import FastAPI  
 #from routes.products import  VH
 from routes.Usuario import UsuarioRouter
-from routes.convocatoria_routes import convocatoria_routes 
-#from routes.citas_routes import citas_router 
+from routes.chatbot_routes import chatbot_routes 
 #from routes.diagnosticos_routes import router as router_diagnosticos
 from alembic import command
 from alembic.config import Config
@@ -39,6 +38,6 @@ app.add_middleware(
 
 #app.include_router(VH)
 app.include_router(UsuarioRouter)
-app.include_router(convocatoria_routes)
-#app.include_router(citas_router)
+#app.include_router(convocatoria_routes)
+app.include_router(chatbot_routes)
 #app.include_router(router_diagnosticos)

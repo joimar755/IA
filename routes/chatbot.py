@@ -32,11 +32,11 @@ def chat_convocatoria(pregunta, max_tokens=200):
     respuesta = texto.split("secretari@:")[-1].strip()
     return respuesta
 
-print("Escribe 'salir' para terminar\n")
+""" print("Escribe 'salir' para terminar\n")
 while True:
     pregunta = input("Tú: ")
     if pregunta.lower() in ["salir", "exit", "quit"]:
         print("Hasta luego 👋")
         break
     respuesta = chat_convocatoria(pregunta)
-    print(f"\nChat-convocatoria: {respuesta}\n")
+    print(f"\nChat-convocatoria: {respuesta}\n") """
